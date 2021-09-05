@@ -24,10 +24,10 @@ const getUsuarios = (request, response) =>{
 }
     
 const addUsuario = (request, response) =>{
-    const {nome,email} = request.body;
+    const {nome,email,localizacao} = request.body;
     
-    client.query(`INSERT INTO usuario (nome, email) VALUES ($1, $2)`, 
-        [nome,email],(error, results) =>{
+    client.query(`INSERT INTO usuario (nome, email,localizacao) VALUES ($1, $2,$3)`, 
+        [nome,email, localizacao],(error, results) =>{
         if(error){
             response.status(400).send(error);
             return;
@@ -38,11 +38,11 @@ const addUsuario = (request, response) =>{
     
 const atualizarUsuario = (request, response) => {
         
-    const { nome, email } = request.body;
+    const { nome, email , localizacao} = request.body;
       
     client.query(
         'UPDATE usuario SET nome = $1 WHERE email=$2',
-            [nome, email],
+            [nome, email,localizacao],
             (error, results) => {
             if (error) {
                 response.status(400).send(error);
@@ -55,7 +55,7 @@ const atualizarUsuario = (request, response) => {
 const deletarUsuario = (request, response) => {
     const id = parseInt(request.params.id)
       
-    client.query('DELETE FROM usuario WHERE id = $1', [id], (error, results) => {
+    client.query('DELETE FROM usuario WHERE email = $1', [email], (error, results) => {
         if (error) {
             response.status(400).send(error);
             return;

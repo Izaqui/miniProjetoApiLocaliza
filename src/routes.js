@@ -12,8 +12,4 @@ routes.post('/sessions', sessao.create);
 routes.get('/usuarios', User.index);
 routes.post('/usuarios', User.create);
 
-routes.delete('usuarios/:id', User.delete);
-routes.delete('sessions/:id', User.delete);
-
-
 module.exports = routes;

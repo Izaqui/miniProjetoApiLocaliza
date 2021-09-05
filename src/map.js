@@ -86,4 +86,3 @@ function geocodeLatLng(geocoder, map, infowindow) {
     })
     .catch((e) => window.alert("Geocoder failed due to: " + e));
 }
-

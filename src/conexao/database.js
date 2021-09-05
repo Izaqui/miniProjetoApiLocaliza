@@ -24,10 +24,10 @@ const getUsuarios = (request, response) =>{
 }
     
 const addUsuario = (request, response) =>{
-    const {nome,email,localizacao} = request.body;
+    const {nome,email,localizacao, msg} = request.body;
     
     client.query(`INSERT INTO usuario (nome, email,localizacao) VALUES ($1, $2,$3)`, 
-        [nome,email, localizacao],(error, results) =>{
+        [nome,email, localizacao,msg],(error, results) =>{
         if(error){
             response.status(400).send(error);
             return;
@@ -38,11 +38,11 @@ const addUsuario = (request, response) =>{
     
 const atualizarUsuario = (request, response) => {
         
-    const { nome, email , localizacao} = request.body;
+    const { nome, email , localizacao, msg} = request.body;
       
     client.query(
         'UPDATE usuario SET nome = $1 WHERE email=$2',
-            [nome, email,localizacao],
+            [nome, email,localizacao,msg],
             (error, results) => {
             if (error) {
                 response.status(400).send(error);
